@@ -1,0 +1,11 @@
+{{ define "content" }}
+<form action="/save" method="POST">
+  <div class="button-wrapper">
+    <input class="button" type="submit" value="Save">
+  </div>
+  <input type="hidden" name="name" value="{{ .Name }}">
+  <textarea name="data" rows=12>{{ .Data }}</textarea>
+</form>
+<script>
+</script>
+{{ end }}

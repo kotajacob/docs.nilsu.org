@@ -1,0 +1,147 @@
+$font-stack: Helvetica, sans-serif
+$mono-font-stack: monospace
+$light-background-color: #fff
+$light-foreground-color: #222
+$dark-foreground-color: #eee
+$dark-background-color: #000
+$light-primary-color: #76657f
+$dark-primary-color: #8b7a95
+$mid-color: #aaa
+$transparent-color: #aaa0
+
+*
+  box-sizing: border-box
+
+body
+  font: 100% $font-stack
+  color: $dark-foreground-color
+  background-color: $dark-background-color
+  margin: 120px 20px
+  @media (prefers-color-scheme: light)
+    color: $light-foreground-color
+    background-color: $light-background-color
+
+.content
+  margin: auto
+  max-width: 600px
+
+.site-title
+  font-size: 3em
+  text-align: center
+  a
+    text-decoration-color: $dark-primary-color
+    @media (prefers-color-scheme: light)
+      text-decoration-color: $light-primary-color
+
+.document-title
+  font: 2em $mono-font-stack
+  text-align: center
+  a
+    text-decoration: none
+
+a
+  color: $dark-foreground-color
+  &:hover, &:active, &:focus
+    color: $dark-primary-color
+  @media (prefers-color-scheme: light)
+    color: $light-foreground-color
+    &:hover, &:active, &:focus
+      color: $light-primary-color
+
+hr
+  border: none
+  margin-top: 20px
+  margin-bottom: 20px
+  border-top: 4px dashed $dark-primary-color
+  @media (prefers-color-scheme: light)
+      border-top: 4px dashed $light-primary-color
+
+blockquote
+  font-style: italic
+  // margin-left: -5em
+  padding-left: 1em
+  color: $dark-foreground-color
+  border-left: 5px solid $dark-primary-color
+  @media (prefers-color-scheme: light)
+    color: $light-foreground-color
+    border-left: 5px solid $light-primary-color
+
+img
+  max-width: 100%
+
+table
+  border-collapse: collapse
+tr
+  border: none
+td
+  padding: 0.3em
+  border-right: solid 3px $dark-primary-color
+  border-left: solid 3px $dark-primary-color
+  @media (prefers-color-scheme: light)
+    border-right: solid 3px $light-primary-color
+    border-left: solid 3px $light-primary-color
+
+form
+  width: 100%
+
+.button-wrapper
+  width: 100%
+  display: flex
+  justify-content: center
+
+a.button
+  text-decoration: none
+  color: $dark-foreground-color
+  @media (prefers-color-scheme: light)
+    color: $light-background-color
+
+.button
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  font: 100% $font-stack
+  font-weight: bold
+  padding: 0.25em 0.75em
+  min-width: 10ch
+  min-height: 44px
+  margin: 0.8em
+  cursor: pointer
+  border: none
+  border-radius: 8px
+  transition: 220ms all ease-in-out
+  color: $dark-foreground-color
+  background-color: $dark-primary-color
+  &:hover,
+  &:active
+    background-color: scale-color($dark-primary-color, $lightness: -20%)
+    @media (prefers-color-scheme: light)
+      background-color: scale-color($light-primary-color, $lightness: -20%)
+  @media (prefers-color-scheme: light)
+    color: $light-background-color
+    background-color: $light-primary-color
+
+textarea
+  resize: none
+  overflow: hidden
+  width: 100%
+  box-sizing: border-box
+  font: 135% $mono-font-stack
+  color: $dark-foreground-color
+  background-color: $dark-background-color
+  outline: none
+  border: 3px solid $dark-foreground-color
+  &:active,
+  &:focus
+    border: 3px solid $dark-primary-color
+  @media (prefers-color-scheme: light)
+    color: $light-foreground-color
+    background-color: $light-background-color
+    border: 3px solid $light-foreground-color
+    &:active,
+    &:focus
+      border: 3px solid $light-primary-color
+
+.history
+  text-align: center
+  font: 100% $mono-font-stack
+  line-height: 150%

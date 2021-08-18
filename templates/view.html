@@ -1,0 +1,17 @@
+{{ define "content" }}
+<div class="button-wrapper">
+  <a class="button" href="/edit/{{ .Name }}">Edit</a>
+  <a class="button" href="/read/{{ .HashName }}">Read Only</a>
+</div>
+<h1 class="document-title"><a href="/read/{{ .HashName }}/{{ .Time.Unix }}">{{ .Time.Format "2006-01-02 15:04:05" }}</a>
+</h1>
+<div class="document">
+  {{ .Data }}
+</div>
+<hr>
+<div class="history">
+  {{ range .Times }}
+  <a href="/view/{{ $.Name }}/{{ .Unix }}">{{ .Format "2006-01-02 15:04:05" }}</a><br>
+  {{ end }}
+</div>
+{{ end }}

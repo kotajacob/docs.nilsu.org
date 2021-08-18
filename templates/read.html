@@ -1,0 +1,13 @@
+{{ define "content" }}
+<h1 class="document-title"><a href="/read/{{ .HashName }}/{{ .Time.Unix }}">{{ .Time.Format "2006-01-02 15:04:05" }}</a>
+</h1>
+<div class="document">
+  {{ .Data }}
+</div>
+<hr>
+<div class="history">
+  {{ range .Times }}
+  <a href="/read/{{ $.HashName }}/{{ .Unix }}">{{ .Format "2006-01-02 15:04:05" }}</a><br>
+  {{ end }}
+</div>
+{{ end }}
