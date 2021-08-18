@@ -2,51 +2,15 @@ package main
 
 import (
 	"encoding/base64"
-	"fmt"
-	"html/template"
 	"log"
 	"net/http"
 	"path"
 	"strconv"
-	text "text/template"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 )
-
-// parseTemplateFiles reads a list of filenames to create a template
-func parseTemplateFiles(filenames ...string) *template.Template {
-	var files []string
-	t := template.New("layout")
-	for _, file := range filenames {
-		files = append(files, path.Join(config.TemplateDir, fmt.Sprintf("%s.html", file)))
-	}
-	t = template.Must(t.ParseFiles(files...))
-	return t
-}
-
-// writeHTML to a http.ResponseWriter based on a list of template files
-func writeHTML(w http.ResponseWriter, data interface{}, filenames ...string) {
-	var files []string
-	for _, file := range filenames {
-		files = append(files, path.Join(config.TemplateDir, fmt.Sprintf("%s.html", file)))
-	}
-
-	templates := template.Must(template.ParseFiles(files...))
-	templates.ExecuteTemplate(w, "layout", data)
-}
-
-// writeHTMLUnsafe to a http.ResponseWriter based on a list of template files
-func writeHTMLUnsafe(w http.ResponseWriter, data interface{}, filenames ...string) {
-	var files []string
-	for _, file := range filenames {
-		files = append(files, path.Join(config.TemplateDir, fmt.Sprintf("%s.html", file)))
-	}
-
-	templates := text.Must(text.ParseFiles(files...))
-	templates.ExecuteTemplate(w, "layout", data)
-}
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	writeHTML(w, nil, "baseof", "index")
@@ -99,7 +63,7 @@ func ViewLatestHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "404 - Error! Document not found.", http.StatusNotFound)
 		return
 	}
-	writeHTMLUnsafe(w, doc, "baseof", "view")
+	writeText(w, doc, "baseof", "view")
 }
 
 // ViewTimeHandler a specific version of a document and prints the data.
@@ -125,7 +89,7 @@ func ViewTimeHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "404 - Error! Document not found.", http.StatusNotFound)
 		return
 	}
-	writeHTMLUnsafe(w, doc, "baseof", "view")
+	writeText(w, doc, "baseof", "view")
 }
 
 // ReadLatestHandler opens the latest version of a hash document and prints the data.
@@ -144,7 +108,7 @@ func ReadLatestHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "404 - Error! Document not found.", http.StatusNotFound)
 		return
 	}
-	writeHTMLUnsafe(w, doc, "baseof", "read")
+	writeText(w, doc, "baseof", "read")
 }
 
 // ReadTimeHandler opens a specific version of a hash document and prints the data.
@@ -170,7 +134,7 @@ func ReadTimeHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "404 - Error! Document not found.", http.StatusNotFound)
 		return
 	}
-	writeHTMLUnsafe(w, doc, "baseof", "read")
+	writeText(w, doc, "baseof", "read")
 }
 
 // EditHandler opens a document from the name in the URL and inserts the
