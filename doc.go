@@ -29,17 +29,6 @@ type Doc struct {
 	Times    *TimeSlice
 }
 
-// TimeSlice is a sortable slice of time.Time
-type TimeSlice []time.Time
-
-func (ts *TimeSlice) Append(t time.Time) {
-	*ts = append(*ts, t)
-}
-
-func (ts TimeSlice) Len() int           { return len(ts) }
-func (ts TimeSlice) Less(i, j int) bool { return ts[i].After(ts[j]) }
-func (ts TimeSlice) Swap(i, j int)      { ts[i], ts[j] = ts[j], ts[i] }
-
 // WriteFile writes data to the named file, creating it if necessary.  If the
 // file does not exist, WriteFile creates it with permissions perm (before
 // umask); otherwise WriteFile truncates it before writing, without changing
