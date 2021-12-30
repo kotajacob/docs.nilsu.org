@@ -1,3 +1,3 @@
 all:
 	sass sass/:public/css/ --style compressed
-	go build
+	go build -o nilsu-docs

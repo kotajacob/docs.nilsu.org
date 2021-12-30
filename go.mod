@@ -1,4 +1,4 @@
-module git.sr.ht/~kota/nilsu/docs
+module git.sr.ht/~kota/docs.nilsu.org
 
 go 1.16
 
