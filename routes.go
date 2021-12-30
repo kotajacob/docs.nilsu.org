@@ -37,7 +37,7 @@ func CreateHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	data := r.Form.Get("data")
-	doc.Data = &data
+	doc.Markdown = &data
 	if err := doc.Write(); err != nil {
 		log.Printf("failed writing new document %v\n", err)
 		http.Error(w, "500 - Error! Could not create document.", http.StatusInternalServerError)
@@ -166,7 +166,7 @@ func SaveHandler(w http.ResponseWriter, r *http.Request) {
 	doc.Name = &name
 	doc.Hash()
 	data := r.Form.Get("data")
-	doc.Data = &data
+	doc.Markdown = &data
 	if err := doc.Write(); err != nil {
 		log.Printf("failed writing new document %v\n", err)
 		http.Error(w, "500 - Error! Could not create document.", http.StatusInternalServerError)

@@ -24,7 +24,7 @@ import (
 type Doc struct {
 	Name     *string
 	HashName *string
-	Data     *string
+	Markdown *string
 	Time     *time.Time
 	Times    *TimeSlice
 }
@@ -99,7 +99,7 @@ func (d *Doc) Write() error {
 		return err
 	}
 	path := filepath.Join(config.DataDir, *d.Name, fmt.Sprintf("%v", now.Unix()))
-	if err := WriteFile(path, []byte(*d.Data), 0600); err != nil {
+	if err := WriteFile(path, []byte(*d.Markdown), 0600); err != nil {
 		return err
 	}
 	// write HashDoc to HashDir
@@ -107,7 +107,7 @@ func (d *Doc) Write() error {
 		return err
 	}
 	path = filepath.Join(config.HashDir, *d.HashName, fmt.Sprintf("%v", now.Unix()))
-	if err := WriteFile(path, []byte(*d.Data), 0600); err != nil {
+	if err := WriteFile(path, []byte(*d.Markdown), 0600); err != nil {
 		return err
 	}
 	return nil
@@ -177,7 +177,7 @@ func (d *Doc) ReadData() error {
 		return err
 	}
 	s := string(data)
-	d.Data = &s
+	d.Markdown = &s
 	return nil
 }
 
@@ -197,20 +197,20 @@ func (d *Doc) ReadHashData() error {
 		return err
 	}
 	s := string(data)
-	d.Data = &s
+	d.Markdown = &s
 	return nil
 }
 
 // HTML converts the data stored in a Doc to HTML using goldmark.
 func (d *Doc) HTML() error {
-	in := bytes.NewBufferString(*d.Data)
+	in := bytes.NewBufferString(*d.Markdown)
 	var out bytes.Buffer
 	md := goldmark.New(goldmark.WithExtensions(extension.Table, extension.Strikethrough, extension.Linkify, extension.TaskList, extension.Typographer, emoji.Emoji))
 	if err := md.Convert(in.Bytes(), &out); err != nil {
 		return err
 	}
 	data := out.String()
-	d.Data = &data
+	d.Markdown = &data
 	return nil
 }
 
