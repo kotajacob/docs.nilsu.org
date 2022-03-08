@@ -1,10 +1,13 @@
 {{ define "content" }}
 <form action="/create" method="POST">
   <div class="button-wrapper">
-    <input class="button" type="submit" value="Create">
+    <input class="button" type="submit" value="Save">
   </div>
   <textarea id="body" name="data" rows=12></textarea>
 </form>
-<script>
-</script>
+<p class="site-description">
+<b>Create and share editable or read-only Markdown documents.</b><br><br>
+Version history is tracked, with the most recent version displayed at the top and previous
+versions timestamped below. No accounts needed! Easy!
+</p>
 {{ end }}
